@@ -1,0 +1,14 @@
+package com.arvidhammarlund.chessAi.chess
+
+enum Move {
+
+  FORWARDS,
+  DIAGONAL_FORWARDS_RIGHT,
+  RIGHT
+  DIAGONAL_BACKWARDS_RIGHT,
+  BACKWARDS, 
+  DIAGONAL_BACKWARDS_RIGHT,
+  LEFT,
+  DIAGONAL_FORWARDS_LEFT;
+
+}
