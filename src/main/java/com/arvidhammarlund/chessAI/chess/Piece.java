@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 enum Piece {
 
-  PAWN {
+  PAWN () {
 
     @Override
-    private static final Move[] getMoves() {
+    private Point[] getMoves() {
       return = { 
         {Move.FORWARDS},
         {Move.DIAGONAL_FORWARDS_RIGHT},
@@ -19,18 +19,34 @@ enum Piece {
   },
   BISHOP {
   
-    @override
-    private static final Move[] getMoves() {
-      return {
-        MOVE.FORWARDS_INF,
-        MOVE.DIAGONALS_FORWARDS_RIGHT_INF,
-        MOVE.right_inf,
-        MOVE.diagonal_backwards_right_inf,
-        MOVE.backwards_inf, 
-        MOVE.diagonal_backwards_right_inf,
-        MOVE.left_inf,
-        MOVE.diagonal_forwards_left_inf;
+    @Override
+    private Point[] availableActions(
+      Point p, Boolean[][] friends, Boolean[][] foes
+    ) {
+      List<Point> res = new ArrayList<>();
+      int inferedSize = friends.length;
+      int[][] directions = {
+        {1,1}, {-1,-1}, {-1,1}, {1,-1};
       }
+      for (int i = 0; i < inferedSize; i++) {
+        for (int[] direction : directions) {
+          int newX = p.getX() + direction[0] * i;
+          int newY = p.getY() + direction[1] * i;
+          if (
+                (newX < 0 || newX > inferedSize) || 
+                (newY < 0 || newY > inferedSize) || 
+                (friends[newX][newY])
+          ) { 
+            directions.remove(dirction); 
+          } elif (foes[newX][newY]) {
+            res.add(new Point(newX, newY));
+            directions.remove(direction);
+          } else {
+            res.add(new Point(newX, newY))
+          }
+        }
+      }
+      return res.toArray();
     }
 
   },
@@ -48,12 +64,35 @@ enum Piece {
 
   },
   ROCK {
-  
-    private static final Move[] BASIC_MOVES = {
-      Board.FORWARDS_INF,
-      Board.RIGHT_INF,
-      Board.BACKWARDS_INF, 
-      Board.LEFT_INF,
+    
+    @Override
+    private Point[] availableActions(
+      Point p, Boolean[][] friends, Boolean[][] foes
+    ) {
+      List<Point> res = new ArrayList<>();
+      int inferedSize = friends.length;
+      int[][] directions = {
+        {0,-1}, {0,1}, {1,0}, {-1,0};
+      }
+      for (int i = 0; i < inferedSize; i++) {
+        for (int[] direction : directions) {
+          int newX = p.getX() + direction[0] * i;
+          int newY = p.getY() + direction[1] * i;
+          if (
+                (newX < 0 || newX > inferedSize) || 
+                (newY < 0 || newY > inferedSize) || 
+                (friends[newX][newY])
+          ) { 
+            directions.remove(dirction); 
+          } elif (foes[newX][newY]) {
+            res.add(new Point(newX, newY));
+            directions.remove(direction);
+          } else {
+            res.add(new Point(newX, newY))
+          }
+        }
+      }
+      return res.toArray();
     }
 
  
@@ -61,51 +100,67 @@ enum Piece {
   KING {
   
     @Override
-    private static final Move[] getMoves() {
-      return {
-        Move.FORWARDS,
-        Move.DIAGONAL_FORWARDS_RIGHT,
-        Move.RIGHT,
-        Move.DIAGONAL_BACKWARDS_RIGHT,
-        Move.BACKWARDS, 
-        Move.DIAGONAL_BACKWARDS_RIGHT,
-        Move.LEFT,
-        Move.DIAGONAL_FORWARDS_LEFT;
+    private Point[] availableActions(
+      Point p, Boolean[][] friends, Boolean[][] foes
+    ) {
+      List<Point> res = new ArrayList<>();
+      for (int i = -1; i < 2; i++) {
+        for (int j = -1; j < 2; i++) {
+          newX = p.getX() + i;
+          newY = p.getY() + j;
+          if (i == 1 && j == 1) continue;
+          if (
+                (newX < 0 || newX > inferedSize) || 
+                (newY < 0 || newY > inferedSize) || 
+                (friends[newX][newY])
+          ) { 
+            directions.remove(dirction); 
+          } elif (foes[newX][newY]) {
+            res.add(new Point(newX, newY));
+            directions.remove(direction);
+          } else {
+            res.add(new Point(newX, newY))
+          }
+        } 
       }
+      return res.toArray();
     }
 
   },
   QUEEN {
   
-    @override
-    private static final move[] getmoves() {
-      return {
-        Move.forwards_inf,
-        Move.diagonal_forwards_right_inf,
-        Move.right_inf,
-        Move.diagonal_backwards_right_inf,
-        Move.backwards_inf, 
-        Move.diagonal_backwards_right_inf,
-        Move.left_inf,
-        Move.diagonal_forwards_left_inf;
+    @Override
+    private Point[] availableActions(
+      Point p, Boolean[][] friends, Boolean[][] foes
+    ) {
+      List<Point> res = new ArrayList<>();
+      int inferedSize = friends.length;
+      int[][] directions = {
+        {0,-1}, {0,1}, {1,0}, {-1,0}, {1,1}, {-1,-1}, {-1,1}, {1,-1};
       }
+      for (int i = 0; i < inferedSize; i++) {
+        for (int[] direction : directions) {
+          int newX = p.getX() + direction[0] * i;
+          int newY = p.getY() + direction[1] * i;
+          if (
+                (newX < 0 || newX > inferedSize) || 
+                (newY < 0 || newY > inferedSize) || 
+                (friends[newX][newY])
+          ) { 
+            directions.remove(dirction); 
+          } elif (foes[newX][newY]) {
+            res.add(new Point(newX, newY));
+            directions.remove(direction);
+          } else {
+            res.add(new Point(newX, newY))
+          }
+        }
+      }
+      return res.toArray();
     }
-
   };
 
-  actions(Point p, boolean isWhite, Piece[][]) {
-    List<Point> res = new ArrayList<>();
-    for (Move[] moves : MOVES) {
-      Point tmp = new Point(p);
-      for (Move move : moves) {
-        move.result(tmp);
-      }
-      res.add(tmp);
-    }
-    return res;
-  } 
-
-  private static final abstract Move[][] getMoves();
+  private Point[] getMoves(Point p, Boolean[][] friends, Boolean[][] foes);
 
 }
 
