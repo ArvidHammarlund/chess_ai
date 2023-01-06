@@ -7,16 +7,9 @@ class Queen implements iPiece {
 
   // --- Attributes ---
   
-  private static final Move[][] BASIC_MOVES = {
-    {Board.FORWARDS},
-    {Board.DIAGONAL_FORWARDS_RIGHT},
-    {Board.RIGHT},
-    {Board.DIAGONAL_BACKWARDS_RIGHT},
-    {Board.BACKWARDS}, 
-    {Board.DIAGONAL_BACKWARDS_RIGHT},
-    {Board.LEFT},
-    {Board.DIAGONAL_FORWARDS_LEFT};
-  }
+  private static final = new Rock();
+  private static final = new Bishop();
+
 
   private static Move[][] MOVES = buildMoves() 
 

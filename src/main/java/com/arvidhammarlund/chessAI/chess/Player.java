@@ -1,18 +1,12 @@
 package com.arvidhammarlund.chessAi.chess
 
-class Player {
+enum Player {
+  WHITE {
+    enum 
+  },
+  BLACK {
+    enum 
+  };
 
-  // --- Attributes ---
-  
-
-  // --- Constructors ---
-  
-
-  // --- Methods ---
-  
-  // --- Helpers ----
-  
-
-  // --- Setters & Getters ---
-
+  public abstract§
 }

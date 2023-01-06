@@ -5,27 +5,37 @@ import java.util.ArrayList;
 
 class King implements iPiece {
 
+  private int x;
+  private int y;
+
+  // --- Constructors ---
+
+
   // --- Attributes ---
   
   private static final Move[][] MOVES = {
-    {Board.FORWARDS},
-    {Board.DIAGONAL_FORWARDS_RIGHT},
-    {Board.RIGHT},
-    {Board.DIAGONAL_BACKWARDS_RIGHT},
-    {Board.BACKWARDS}, 
-    {Board.DIAGONAL_BACKWARDS_RIGHT},
-    {Board.LEFT},
-    {Board.DIAGONAL_FORWARDS_LEFT};
+    {Move.FORWARDS},
+    {Move.DIAGONAL_FORWARDS_RIGHT},
+    {Move.RIGHT},
+    {Move.DIAGONAL_BACKWARDS_RIGHT},
+    {Move.BACKWARDS}, 
+    {Move.DIAGONAL_BACKWARDS_RIGHT},
+    {Move.LEFT},
+    {Move.DIAGONAL_FORWARDS_LEFT};
   }
 
-  // --- Setters & Getters ---
-
-  Move[][] getMoves() {
-    List<Move[]> res = new ArrayList<Move[]>();
-    for (Move m : MOVES) {
-      res.add(m.clone());
+  // --- Methods ---
+    
+  static int[][] actions(Point p, boolean isWhite, int size) {
+    List<int[]> res = new ArrayList<>();
+    for (Move[] moves : Moves) {
+      Point tmp = new Point(p);
+      for (Move move : moves) {
+        move.result(tmp, isWhite)
+      }
+      
     }
-    return res;
+    
   }
 
 }

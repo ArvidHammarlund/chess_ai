@@ -5,36 +5,38 @@ import java.util.ArrayList;
 
 class Bishop implements iPiece {
 
-  // --- Attributes ---
-  
-  private static final Move[][] BASIC_MOVES = {
-    {Board.DIAGONAL_FORWARDS_RIGHT},
-    {Board.DIAGONAL_BACKWARDS_RIGHT},
-    {Board.DIAGONAL_BACKWARDS_RIGHT},
-    {Board.DIAGONAL_FORWARDS_LEFT};
-  }
+  int SIZE_OF_BOARD;
 
-  private static Move[][] MOVES = buildMoves() 
+  Point[] actions(iPiece[][] board) {
+    List<Point> res = new ArrayList<>();
+    int[][] directions = {
+      new int[] {-1,1},
+      new int[] {1,1},
+      new int[] {-1,-1},
+      new int[] {1,1},
+    }
 
-  // --- Helpers ---
+    for (int x = 1; x < Bishop.SIZE_OF_BOARD; x++) {
+      for (int y = 1; y < Bishop.SIZE_OF_BOARD; y++) {
+        for (int[] direction : directions) {
+          try {
+            newPoint = new Point(this.position)
+            newPoint.translate(
+              direction[0] * x,
+              direction[1] * y
+            )
+            res.add(this.result(newPoint, board));
+          } catch InvalidStateException {
 
-  private static Move[][] buildMoves() {
-    res = ArrayList<>;
-    for (Move m : Queen.BASIC_MOVES) {
-      for (int i = 1; i =< iPiece.LONGEST_PERMITED_CONSEQUTIVE_MOVE; i++) {
-        for (int j = 0; j < i; j++) res.add(m);
+          }
+
+        }
       }
     }
-    return res.toArray();
   }
 
-  // --- Setters & Getters ---
+  static result(Point p) throws InvalidStateException {
 
-  List<Move[]> getMoves() {
-    List<Move[]> res = new ArrayList<Move[]>();
-    for (Move m : MOVES) {
-      res.add(m.clone());
-    }
-    return res;
   }
+
 }

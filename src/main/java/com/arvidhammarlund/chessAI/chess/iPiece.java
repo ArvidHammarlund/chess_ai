@@ -4,7 +4,9 @@ import java.util.List;
 
 public interface iPiece {
   
-  LONGEST_PERMITED_CONSEQUTIVE_MOVE = 7;
+  static int LONGEST_PERMITED_CONSEQUTIVE_MOVE = 7;
+
+  Tile getTile()
 
   List<Move[]> getMoves();
 
