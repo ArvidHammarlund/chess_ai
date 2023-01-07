@@ -3,7 +3,12 @@ import java.awt.Point;
 
 class CommonValidator implements MoveValidator {
 
-  boolean isValid(Tile t, Piece[][] friends) {
+  boolean isValid(
+      Tile t,
+      Piece[][] friends,
+      Piece[][] foes,
+      boolean isWhite
+  ) {
     int inferedSize = friends.length;
     int x = t.getX();
     int y = t.getY();

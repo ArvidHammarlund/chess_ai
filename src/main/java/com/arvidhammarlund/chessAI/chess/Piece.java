@@ -80,8 +80,13 @@ public enum Piece {
 
   // --- Methods ---
 
-  List<Tile> availableMoves(Tile t) {
-    return choserAvailableMoves.iterate(t);
+  List<Tile> availableMoves(
+      Tile t,
+      Piece[][] friends,
+      Piece[][] foes,
+      boolean isWhite
+  ) {
+    return choserAvailableMoves.availableMoves(t, friends, foes, isWhite);
   }
 
 }

@@ -18,7 +18,12 @@ class DirectionalIterator implements TileIterator {
 
   // --- Methods ---
 
-  List<Tile> iterate(Tile t) {
+  List<Tile> iterate(
+      Tile t,
+      Piece[][] friends,
+      Piece[][] foes,
+      boolean isWhite
+  ) {
     List<Tile> res = new ArrayList<>();
     direction[] directions = DIRECTIONS.copy();
     int i = 1;
@@ -29,8 +34,11 @@ class DirectionalIterator implements TileIterator {
         int x = t.getX() + i * direction.getDx(); 
         int y = t.getY() + i * direction.getDy();
         Tile newTile = new Tile(x,y);
-        if (validator.validate(newTile)) {
+        if (validator.isValid(newTile, friends, foes, isWhite)) {
           res.add(newTile);
+        } elif (foes[x][y] != null) {
+          res.add(newTile);
+          directions.remove(direction);
         } else {
           directions.remove(direction);
         }
@@ -39,6 +47,8 @@ class DirectionalIterator implements TileIterator {
     } while (! directions.isEmpty());
     return res
   }
+
+  // --- Helpers ---
 
 }
 

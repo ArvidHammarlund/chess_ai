@@ -22,6 +22,7 @@ class MirroredIterator implements TileIterator {
 
   List<Tile> iterate(Tile t) {
     List<Tile> res = new ArrayList<>();
+
     
     return res
   }

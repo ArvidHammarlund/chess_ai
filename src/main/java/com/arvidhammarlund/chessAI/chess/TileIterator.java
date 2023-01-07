@@ -4,6 +4,11 @@ import java.util.List;
 
 interface TileIterator {
 
-  List<Tile> iterate(Tile t);
+  List<Tile> availableMoves(
+      Tile t,
+      Piece[][] friends,
+      Piece[][] foes,
+      boolean isWhite
+  );
 
 }
