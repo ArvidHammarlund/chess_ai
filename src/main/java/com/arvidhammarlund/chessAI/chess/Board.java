@@ -1,9 +1,10 @@
-package com.arvidhammarlund.chessAi.chess
+package com.arvidhammarlund.chessAi.chess;
 
 import java.util.List;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.awt.Point;
 
 class Board {
 
@@ -49,7 +50,7 @@ class Board {
     } else {
       actorKind = black.get(p);
       friends = getTeam(false);
-      foes = getTeam(true)
+      foes = getTeam(true);
     }
     return actorKind.availableMoves(p, friend, foes, isWhite);
   } 
@@ -70,7 +71,7 @@ class Board {
     for (int i = 0; i < Board.SIZE; i++) {
       res.put(new Point(i,1), Piece.PAWN);
     }
-    return res
+    return res;
   }
 
   private Map<Point, Piece> buildWhite() {
@@ -87,18 +88,18 @@ class Board {
     for (int i = 0; i < Board.SIZE; i++) {
       res.put(new Point(i,6), Piece.PAWN);
     }
-    return res
+    return res;
   }
 
   // --- Setters & Getters ---
   
   public Piece[][] getTeam(boolean isWhite) {
     Map<Point, Piece> team = (isWhite) ? this.white : this.black;
-    res = new Piece[Board.SIZE][Board.SIZE]():
+    Piece[][] res = new Piece[Board.SIZE][Board.SIZE];
     for (Map.entry<Point, Piece> item : team.entrySet()) {
       res[item.getKey().getX()][item.getKey().getY()] = item.getValue();
     }
-    return res
+    return res;
   }
 
 }

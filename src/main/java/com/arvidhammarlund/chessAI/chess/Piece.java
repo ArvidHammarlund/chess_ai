@@ -1,18 +1,19 @@
-package com.arvidhammarlund.chessAi.chess
+package com.arvidhammarlund.chessAi.chess;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.awt.Point;
 
 enum Piece {
 
-  PAWN () {
+  PAWN {
 
     @Override
     Point[] availableMoves(
-        Point p,
+        Point p, 
         Piece[][] friends,
         Piece[][] foes,
-        boolean isWhite
+        Boolean isWhite
     ) {
 
       List<Point> res = new ArrayList<>();
@@ -20,8 +21,8 @@ enum Piece {
       int y = p.getY();
       // Forward move 
       if (
-          friends[x][y + 1] == null && 
-          foes[x][y + 1] == null && 
+          (friends[x][y + 1] == null) && 
+          (foes[x][y + 1] == null) && 
           validMove()
       ) {
         res.add(new Point(p).translate(0,1));
@@ -33,7 +34,7 @@ enum Piece {
       for (int[] direction : directions) {
         x += direction[0]; 
         y += direction[1];
-        if {foes[x][y]} res.add(new Point(x,y));
+        if (foes[x][y] != null) res.add(new Point(x,y));
       }
       return res.toArray();
     }
@@ -99,10 +100,10 @@ enum Piece {
     ) {
       List<Point> res = new ArrayList<>();
       List<int[]> directions = Arrays.asList(new int[][] {
-        {-1,-1},  // Downleft 
-        {-1,1},   // Dowright
-        {1,-1},   // Upleft
-        {1,1};    // Upright
+        new int[]{-1,-1},  // Downleft 
+        new int[]{-1,1},   // Dowright
+        new int[]{1,-1},   // Upleft
+        new int[]{1,1}    // Upright
       });
       int i = 1;
       do {
@@ -118,7 +119,7 @@ enum Piece {
             directions.remove(direction);
           }
         }
-        i++ 
+        i++;
       } while (! directions.isEmpty());
       return res.toArray();
     } 
@@ -139,14 +140,14 @@ enum Piece {
         {-1,2},  // 2up - 1left 
         {1,2},   // 2up - 1right
         {-2,1},   // 2left - 1up
-        {-2,-1};    // 2left - 1down
+        {-2,-1},    // 2left - 1down
         {-1,-2},  // 2down - 1left 
         {1,-2},   // 2down - 1right
         {2,1},   // 2right - 1up
-        {2,-1};    // 2right - 1down
+        {2,-1},   // 2right - 1down
       });
       for (int[] position : position) {
-        Point newPoint = new Point(p).translate(position[0], position[1])
+        Point newPoint = new Point(p).translate(position[0], position[1]);
         if (validMove(newPoint)) res.add(newPoint);
       }
      
@@ -169,7 +170,7 @@ enum Piece {
         {-1,0},  // left 
         {1,0},   // right
         {0,1},   // up
-        {0,-1};    // down
+        {0,-1}    // down
       });
       int i = 1;
       do {
@@ -185,7 +186,7 @@ enum Piece {
             directions.remove(direction);
           }
         }
-        i++ 
+        i++;
       } while (! directions.isEmpty());
       return res.toArray();
     } 
@@ -209,7 +210,7 @@ enum Piece {
         {-1,-1},  // Downleft 
         {-1,1},   // Dowright
         {1,-1},   // Upleft
-        {1,1};    // Upright
+        {1,1}   // Upright
       });
       int i = 1;
       do {
@@ -225,7 +226,7 @@ enum Piece {
             directions.remove(direction);
           }
         }
-        i++ 
+        i++; 
       } while (! directions.isEmpty());
       return res.toArray();
     } 
