@@ -1,12 +1,6 @@
 /Users/arvidhammarlund/programming/projects/chessAI/src/main/java/com/arvidhammarlund/chessAI/Observer.java
-/Users/arvidhammarlund/programming/projects/chessAI/src/main/java/com/arvidhammarlund/chessAI/view/PictureAllocation.java
 /Users/arvidhammarlund/programming/projects/chessAI/src/main/java/com/arvidhammarlund/chessAI/App.java
-/Users/arvidhammarlund/programming/projects/chessAI/src/main/java/com/arvidhammarlund/chessAI/view/Tile.java
 /Users/arvidhammarlund/programming/projects/chessAI/src/main/java/com/arvidhammarlund/chessAI/chess/Piece.java
-/Users/arvidhammarlund/programming/projects/chessAI/src/main/java/com/arvidhammarlund/chessAI/view/Frame.java
-/Users/arvidhammarlund/programming/projects/chessAI/src/main/java/com/arvidhammarlund/chessAI/view/TilePanel.java
-/Users/arvidhammarlund/programming/projects/chessAI/src/main/java/com/arvidhammarlund/chessAI/view/ViewFactory.java
 /Users/arvidhammarlund/programming/projects/chessAI/src/main/java/com/arvidhammarlund/chessAI/chess/Game.java
 /Users/arvidhammarlund/programming/projects/chessAI/src/main/java/com/arvidhammarlund/chessAI/chess/Board.java
 /Users/arvidhammarlund/programming/projects/chessAI/src/main/java/com/arvidhammarlund/chessAI/Model.java
-/Users/arvidhammarlund/programming/projects/chessAI/src/main/java/com/arvidhammarlund/chessAI/view/Piece.java

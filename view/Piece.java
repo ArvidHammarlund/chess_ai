@@ -1,16 +1,13 @@
 package com.arvidhammarlund.chessAI.view;
 
 import jaxax.swing.*;
-import java.awt.Color;
 
-class Tile extends JPanel {
+class Piece extends JLabel {
 
-  Tile() {
+  Piece() {
     super();
     this.setLayout(new GridLayout(8,8));
     this.addTiles();
   }
-
- 
 
 }

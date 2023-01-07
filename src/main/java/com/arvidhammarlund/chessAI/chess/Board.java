@@ -1,10 +1,11 @@
-package com.arvidhammarlund.chessAi.chess;
+package com.arvidhammarlund.chessAI.chess;
 
 import java.util.List;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.awt.Point;
+import java.lang.AssertionError;
 
 class Board {
 

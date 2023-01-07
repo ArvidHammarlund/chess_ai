@@ -1,6 +1,7 @@
-package com.arvidhammarlund.chessAi.chess;
+package com.arvidhammarlund.chessAI.chess;
 
 import java.awt.Point;
+import java.lang.AssertionError;
 
 public class Game {
 
@@ -12,13 +13,13 @@ public class Game {
   }
 
   public Point[] allowedMovesCurrentPlayer(Point p)
-      throws assertionException {
+      throws AssertionError {
     assert remainingPiecesCurrentPlayer(currentPlayerIsWhite).contains(p);
     return board.allowedMoves(p, currentPlayerIsWhite);
   }
 
   public void movePieceCurrentPlayer(Point current, Point destination)
-      throws assertionException {
+      throws AssertionError {
     board.movePiece(current, destination, currentPlayerIsWhite);
     changePlayer();
   }

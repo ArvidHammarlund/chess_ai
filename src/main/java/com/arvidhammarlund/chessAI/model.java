@@ -1,4 +1,4 @@
-package com.arvidhammarlund.chessAi;
+package com.arvidhammarlund.chessAI;
 
 import com.arvidhammarlund.chessAi.chess.Game;
 import java.util.List;

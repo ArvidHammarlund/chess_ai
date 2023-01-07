@@ -1,6 +1,8 @@
 package com.arvidhammarlund.chessAI.view;
 
 import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 class Frame extends JFrame {
 

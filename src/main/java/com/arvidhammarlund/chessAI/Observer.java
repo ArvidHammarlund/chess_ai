@@ -1,4 +1,4 @@
-package com.arvidhammarlund.chessAi;
+package com.arvidhammarlund.chessAI;
 
 public interface Observer {
   
