@@ -8,159 +8,247 @@ enum Piece {
   PAWN () {
 
     @Override
-    private Point[] getMoves() {
-      return = { 
-        {Move.FORWARDS},
-        {Move.DIAGONAL_FORWARDS_RIGHT},
-        {Move.DIAGONAL_FORWARDS_LEFT};
+    Point[] availableMoves(
+        Point p,
+        Piece[][] friends,
+        Piece[][] foes,
+        boolean isWhite
+    ) {
+
+      List<Point> res = new ArrayList<>();
+      int x = p.getX();
+      int y = p.getY();
+      // Forward move 
+      if (
+          friends[x][y + 1] == null && 
+          foes[x][y + 1] == null && 
+          validMove()
+      ) {
+        res.add(new Point(p).translate(0,1));
       }
+      // Diagonal attacks
+      int[][] directions = new int[][] {
+        {1,1}, {-1,1} 
+      };
+      for (int[] direction : directions) {
+        x += direction[0]; 
+        y += direction[1];
+        if {foes[x][y]} res.add(new Point(x,y));
+      }
+      return res.toArray();
     }
 
+  },  
+
+  KING {
+
+    private List<Point> getNeighbours(Point p) {
+      List<Point> res = new ArrayList<>(9);
+      for (int x = p.getX()-1; x < p.getX()+2; x++) {
+        for (int y = p.getY()-1; y < p.getY()+2; y++) {
+          Point newPoint = new Point (x,y);
+          if (!newPoint.equals(p)) res.add(newPoint);
+        }
+      }
+      return res;
+    }
+
+    @Override 
+    private boolean validMove(
+        Point p,
+        Piece[][] friends,
+        Piece[][] foes
+    ) {
+      boolean res = Piece.validMove();
+      Point PointOfEnemyKing;
+        for (int i = 0; i < foes.length; i++) {
+          for (int j = 0; j < foes[i].length; i++) {
+            if (foes[i][j] == Piece.KING) PointOfEnemyKing = new Point(i,j);
+          } 
+        }
+      if (! PointOfEnemyKing == null) {
+        res &= ! getNeighbours().contains(PointOfEnemyKing);
+      } 
+      return res;
+      
+    }
+  
+    @Override
+    Point[] availableMoves(
+        Point p, 
+        Piece[][] friends,
+        Piece[][] foes,
+        Boolean isWhite
+    ) {
+      List<Point> res = new ArrayList<>();
+      for (Point neighbour : getNeighbours()) {
+        if (validMove(neighbour, friends, foes)) res.add(neighbour);
+      }
+      return res.toArray();
+    }
   },
+
   BISHOP {
   
     @Override
-    private Point[] availableActions(
-      Point p, Boolean[][] friends, Boolean[][] foes
+    Point[] availableMoves(
+        Point p, 
+        Piece[][] friends,
+        Piece[][] foes,
+        Boolean isWhite
     ) {
       List<Point> res = new ArrayList<>();
-      int inferedSize = friends.length;
-      int[][] directions = {
-        {1,1}, {-1,-1}, {-1,1}, {1,-1};
-      }
-      for (int i = 0; i < inferedSize; i++) {
-        for (int[] direction : directions) {
-          int newX = p.getX() + direction[0] * i;
-          int newY = p.getY() + direction[1] * i;
-          if (
-                (newX < 0 || newX > inferedSize) || 
-                (newY < 0 || newY > inferedSize) || 
-                (friends[newX][newY])
-          ) { 
-            directions.remove(dirction); 
-          } elif (foes[newX][newY]) {
-            res.add(new Point(newX, newY));
-            directions.remove(direction);
+      List<int[]> directions = Arrays.asList(new int[][] {
+        {-1,-1},  // Downleft 
+        {-1,1},   // Dowright
+        {1,-1},   // Upleft
+        {1,1};    // Upright
+      });
+      int i = 1;
+      do {
+        Iterator iter = directions.iterator();
+        while (iter.hasNext()) {
+          int[] direction = iter.next();
+          int x = p.getX() * direction[0]; 
+          int y = p.getY() * direction[1];
+          Point newPoint = new Point(x,y);
+          if (validMove(newPoint)) {
+            res.add(newPoint);
           } else {
-            res.add(new Point(newX, newY))
+            directions.remove(direction);
           }
         }
-      }
+        i++ 
+      } while (! directions.isEmpty());
       return res.toArray();
-    }
+    } 
 
   },
+
   KNIGHT {
 
     @Override
-    private static final Move[] getMoves() {
-      return = { 
-        {Move.PERPENDICULAR_FORWARDS_LEFT},
-        {Move.PERPENDICULAR_FORWARDS_RIGHT},
-        {Move.PERPENDICULAR_BACKWARDS_LEFT},
-        {Move.PERPENDICULAR_BACKWARDS_RIGHT};
+    Point[] availableMoves(
+        Point p, 
+        Piece[][] friends,
+        Piece[][] foes,
+        Boolean isWhite
+    ) {
+      List<Point> res = new ArrayList<>();
+      List<int[]> positions = Arrays.asList(new int[][] {
+        {-1,2},  // 2up - 1left 
+        {1,2},   // 2up - 1right
+        {-2,1},   // 2left - 1up
+        {-2,-1};    // 2left - 1down
+        {-1,-2},  // 2down - 1left 
+        {1,-2},   // 2down - 1right
+        {2,1},   // 2right - 1up
+        {2,-1};    // 2right - 1down
+      });
+      for (int[] position : position) {
+        Point newPoint = new Point(p).translate(position[0], position[1])
+        if (validMove(newPoint)) res.add(newPoint);
       }
+     
+      return res.toArray();
     }
 
   },
+
   ROCK {
     
     @Override
-    private Point[] availableActions(
-      Point p, Boolean[][] friends, Boolean[][] foes
+    Point[] availableMoves(
+        Point p, 
+        Piece[][] friends,
+        Piece[][] foes,
+        Boolean isWhite
     ) {
       List<Point> res = new ArrayList<>();
-      int inferedSize = friends.length;
-      int[][] directions = {
-        {0,-1}, {0,1}, {1,0}, {-1,0};
-      }
-      for (int i = 0; i < inferedSize; i++) {
-        for (int[] direction : directions) {
-          int newX = p.getX() + direction[0] * i;
-          int newY = p.getY() + direction[1] * i;
-          if (
-                (newX < 0 || newX > inferedSize) || 
-                (newY < 0 || newY > inferedSize) || 
-                (friends[newX][newY])
-          ) { 
-            directions.remove(dirction); 
-          } elif (foes[newX][newY]) {
-            res.add(new Point(newX, newY));
-            directions.remove(direction);
+      List<int[]> directions = Arrays.asList(new int[][] {
+        {-1,0},  // left 
+        {1,0},   // right
+        {0,1},   // up
+        {0,-1};    // down
+      });
+      int i = 1;
+      do {
+        Iterator iter = directions.iterator();
+        while (iter.hasNext()) {
+          int[] direction = iter.next();
+          int x = p.getX() * direction[0]; 
+          int y = p.getY() * direction[1];
+          Point newPoint = new Point(x,y);
+          if (validMove(newPoint)) {
+            res.add(newPoint);
           } else {
-            res.add(new Point(newX, newY))
+            directions.remove(direction);
           }
         }
-      }
+        i++ 
+      } while (! directions.isEmpty());
       return res.toArray();
-    }
-
- 
+    } 
   },
-  KING {
-  
-    @Override
-    private Point[] availableActions(
-      Point p, Boolean[][] friends, Boolean[][] foes
-    ) {
-      List<Point> res = new ArrayList<>();
-      for (int i = -1; i < 2; i++) {
-        for (int j = -1; j < 2; i++) {
-          newX = p.getX() + i;
-          newY = p.getY() + j;
-          if (i == 1 && j == 1) continue;
-          if (
-                (newX < 0 || newX > inferedSize) || 
-                (newY < 0 || newY > inferedSize) || 
-                (friends[newX][newY])
-          ) { 
-            directions.remove(dirction); 
-          } elif (foes[newX][newY]) {
-            res.add(new Point(newX, newY));
-            directions.remove(direction);
-          } else {
-            res.add(new Point(newX, newY))
-          }
-        } 
-      }
-      return res.toArray();
-    }
 
-  },
   QUEEN {
   
     @Override
-    private Point[] availableActions(
-      Point p, Boolean[][] friends, Boolean[][] foes
+    Point[] availableMoves(
+        Point p, 
+        Piece[][] friends,
+        Piece[][] foes,
+        Boolean isWhite
     ) {
       List<Point> res = new ArrayList<>();
-      int inferedSize = friends.length;
-      int[][] directions = {
-        {0,-1}, {0,1}, {1,0}, {-1,0}, {1,1}, {-1,-1}, {-1,1}, {1,-1};
-      }
-      for (int i = 0; i < inferedSize; i++) {
-        for (int[] direction : directions) {
-          int newX = p.getX() + direction[0] * i;
-          int newY = p.getY() + direction[1] * i;
-          if (
-                (newX < 0 || newX > inferedSize) || 
-                (newY < 0 || newY > inferedSize) || 
-                (friends[newX][newY])
-          ) { 
-            directions.remove(dirction); 
-          } elif (foes[newX][newY]) {
-            res.add(new Point(newX, newY));
-            directions.remove(direction);
+      List<int[]> directions = Arrays.asList(new int[][] {
+        {-1,0},   // left 
+        {1,0},    // right
+        {0,1},    // up
+        {0,-1},   // down
+        {-1,-1},  // Downleft 
+        {-1,1},   // Dowright
+        {1,-1},   // Upleft
+        {1,1};    // Upright
+      });
+      int i = 1;
+      do {
+        Iterator iter = directions.iterator();
+        while (iter.hasNext()) {
+          int[] direction = iter.next();
+          int x = p.getX() * direction[0]; 
+          int y = p.getY() * direction[1];
+          Point newPoint = new Point(x,y);
+          if (validMove(newPoint)) {
+            res.add(newPoint);
           } else {
-            res.add(new Point(newX, newY))
+            directions.remove(direction);
           }
         }
-      }
+        i++ 
+      } while (! directions.isEmpty());
       return res.toArray();
-    }
+    } 
+
   };
 
-  private Point[] getMoves(Point p, Boolean[][] friends, Boolean[][] foes);
+  private boolean validMove(Point p, Piece[][] friends) {
+    int inferedSize = friends.length;
+    int x = p.getX();
+    int y = p.getY();
+    return ! (
+      (x < 0 || x >= inferedSize) || 
+      (y < 0 || x >= inferedSize) || 
+      (friends[x][y])
+    );
+  }
+
+  abstract Point[] availableMoves(
+      Point p,
+      Piece[][] friends,
+      Piece[][] foes,
+      boolean isWhite
+  );
 
 }
 
