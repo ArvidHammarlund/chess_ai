@@ -1,12 +1,10 @@
-package com.arvidhammarlund.chessAI.chess;
+package com.arvidhammarlund.chessAI.chess.pieces;
 
-class CommonValidator implements MoveValidator {
+class CommonValidator {
 
-  static boolean validateMove(
+  boolean validateMove(
       Tile t,
       Piece[][] friends,
-      Piece[][] foes,
-      boolean isWhite
   ) {
     int inferedSize = friends.length;
     int x = t.getX();
@@ -18,7 +16,7 @@ class CommonValidator implements MoveValidator {
     );
   }
 
-  static boolean validateAttack(Tile t, piece[][] foes) {
+  boolean validateAttack(Tile t, piece[][] foes) {
     return foes[t.getX()][t.getY()] != null;
   }
 

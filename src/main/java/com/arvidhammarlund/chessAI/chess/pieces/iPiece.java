@@ -1,14 +1,16 @@
-package com.arvidhammarlund.chessAI.chess;
+package com.arvidhammarlund.chessAI.piece.chess;
 
 import java.util.List;
 
-interface TileIterator {
+interface iPiece {
 
-  List<Tile> availableMoves(
+ List<Tile> getAvailableMoves(
       Tile t,
       Piece[][] friends,
       Piece[][] foes,
       boolean isWhite
-  );
+  ); 
 
 }
+
+

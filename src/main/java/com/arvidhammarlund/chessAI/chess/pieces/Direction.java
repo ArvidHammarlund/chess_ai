@@ -1,6 +1,6 @@
 package com.arvidhammarlund.chessAI.chess;
 
-enum Direction {
+enum Move {
 
   // --- Constants ---
 
@@ -27,12 +27,8 @@ enum Direction {
 
   // --- Setters & Getters ---
 
-  int getDx(boolean isWhite) {
-    return (isWhite) ? dx : dx * -1;
-  }
-
-  int getDy(boolean isWhite) {
-    return (isWhite) ? dy : dy * -1;
+  Tile result(Tile t) {
+    return new Tile(t).translate(dx,dy);
   }
 
 }

@@ -2,34 +2,32 @@ package com.arvidhammarlund.chessAI.chess;
 
 import java.util.List;
 
-class DirectionalIterator implements TileIterator {
+class SequentialIterator {
  
   // --- Attriubtes ---
 
   private final direction[] directions;
   private final MoveValidator validator;
-  private final int length;
 
   // --- Constructor ---
  
   DirectionalIterator(
       MoveValidator validator, 
-      Directions[] directions, 
-      int length) {
+      Directions[] directions) {
     this.directions = directions.copy();
     this.validator = validator;
-    this.length = length;
   }
 
   // --- Methods ---
 
+  @Override
   List<Tile> availableMoves(
       Tile t,
       Piece[][] friends,
       Piece[][] foes,
       boolean isWhite) {
     List<Tile> res = new ArrayList<>();
-    for (int i=1; !directions.isEmpty() && i <= length; i++) {
+    for (int i=1; !directions.isEmpty(); i++) {
       for (Iterator iter=directions.iterator(); iter.hasNext();) {
         Tile result = result(t, iter.next(), i, isWhite);
         if (isValidMove(result, friends, foes, isWhite)) {
