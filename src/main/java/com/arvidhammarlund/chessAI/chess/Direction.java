@@ -27,12 +27,12 @@ enum Direction {
 
   // --- Setters & Getters ---
 
-  int getDx() {
-    return dx;
+  int getDx(boolean isWhite) {
+    return (isWhite) ? dx : dx * -1;
   }
 
-  int getDy() {
-    return dy;
+  int getDy(boolean isWhite) {
+    return (isWhite) ? dy : dy * -1;
   }
 
 }

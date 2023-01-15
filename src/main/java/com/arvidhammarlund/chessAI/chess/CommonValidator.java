@@ -1,9 +1,8 @@
 package com.arvidhammarlund.chessAI.chess;
-import java.awt.Point;
 
 class CommonValidator implements MoveValidator {
 
-  boolean isValid(
+  static boolean validateMove(
       Tile t,
       Piece[][] friends,
       Piece[][] foes,
@@ -17,6 +16,10 @@ class CommonValidator implements MoveValidator {
       (y < 0 || x >= inferedSize) || 
       (friends[x][y] != null)
     );
+  }
+
+  static boolean validateAttack(Tile t, piece[][] foes) {
+    return foes[t.getX()][t.getY()] != null;
   }
 
 }

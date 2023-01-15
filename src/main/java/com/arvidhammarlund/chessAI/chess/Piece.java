@@ -10,11 +10,9 @@ public enum Piece {
     new DirectionalInterator(
       new PawnsValidator(),
       {Direction.UP, 
-       Direction.DOWN,
        Direction.DIAGONAL_UP_LEFT, 
-       Direction.DIAGONAL_UP_RIGHT,
-       Direction.DIAGONAL_DOWN_LEFT,
-       Direction.DIAGONAL_DOWN_RIGHT}
+       Direction.DIAGONAL_UP_RIGHT},
+      1
     )
   ),
   KING (
@@ -28,6 +26,7 @@ public enum Piece {
        Direction.DIAGONAL_UP_RIGHT,
        Direction.DIAGONAL_DOWN_LEFT,
        Direction.DIAGONAL_DOWN_RIGHT}
+      1
     )
   ),
   BISHOP (
@@ -37,6 +36,7 @@ public enum Piece {
        Direction.DIAGONAL_UP_RIGHT,
        Direction.DIAGONAL_DOWN_LEFT,
        Direction.DIAGONAL_DOWN_RIGHT}
+      7
     )
   ),
   KNIGHT (
@@ -52,9 +52,10 @@ public enum Piece {
        Direction.DOWN,
        Direction.LEFT,
        Direction.RIGHT}
+      7
     )
   ), 
-  ROCK (
+  QUEEN (
     new DirectionalInterator(
       new CommonValidator(),
       {Direction.UP, 
@@ -65,17 +66,18 @@ public enum Piece {
        Direction.DIAGONAL_UP_RIGHT,
        Direction.DIAGONAL_DOWN_LEFT,
        Direction.DIAGONAL_DOWN_RIGHT}
+      7
     )
   );
     
   // --- Attributes ---
 
-  private final TileIterator choserAvailableMoves;
+  private final TileIterator iterator;
 
   // --- Constructor ---
 
   Piece(TileIterator iterator) {
-    this.choserAvailableMoves = iterator; 
+    this.iterator = iterator; 
   }
 
   // --- Methods ---
@@ -86,7 +88,7 @@ public enum Piece {
       Piece[][] foes,
       boolean isWhite
   ) {
-    return choserAvailableMoves.availableMoves(t, friends, foes, isWhite);
+    return iterator.availableMoves(t, friends, foes, isWhite);
   }
 
 }
