@@ -2,9 +2,9 @@ package com.arvidhammarlund.chessAI.chess.pieces;
 
 class CommonValidator {
 
-  boolean validateMove(
+  boolean isValidMove(
       Tile t,
-      Piece[][] friends,
+      Piece[][] friends
   ) {
     int inferedSize = friends.length;
     int x = t.getX();
@@ -16,7 +16,7 @@ class CommonValidator {
     );
   }
 
-  boolean validateAttack(Tile t, piece[][] foes) {
+  boolean isValidAttack(Tile t, Piece[][] foes) {
     return foes[t.getX()][t.getY()] != null;
   }
 

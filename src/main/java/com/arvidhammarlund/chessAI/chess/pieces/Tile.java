@@ -1,4 +1,4 @@
-package com.arvidhammarlund.chessAI.chess;
+package com.arvidhammarlund.chessAI.chess.pieces;
 
 /**
  *  Quick emaluator of awt.Point with int return instead of double
@@ -43,9 +43,10 @@ class Tile {
     return (((int) bits) ^ ((int) (bits >> 32)));
   }
 
-  void translate(int dx, int dy) {
+  Tile translate(int dx, int dy) {
     x += dx;
     y += dy;
+    return this;
   }
 
   // --- Getters & Setters ---

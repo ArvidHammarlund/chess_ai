@@ -1,0 +1,14 @@
+com/arvidhammarlund/chessAI/chess/pieces/King.class
+com/arvidhammarlund/chessAI/chess/pieces/Rock.class
+com/arvidhammarlund/chessAI/Observer.class
+com/arvidhammarlund/chessAI/chess/pieces/Queen.class
+com/arvidhammarlund/chessAI/chess/pieces/SequentialIterator.class
+com/arvidhammarlund/chessAI/chess/pieces/Pawn.class
+com/arvidhammarlund/chessAI/chess/pieces/iPiece.class
+com/arvidhammarlund/chessAI/chess/pieces/Knight.class
+com/arvidhammarlund/chessAI/chess/pieces/CommonValidator.class
+com/arvidhammarlund/chessAI/chess/pieces/Piece.class
+com/arvidhammarlund/chessAI/chess/pieces/Bishop.class
+com/arvidhammarlund/chessAI/App.class
+com/arvidhammarlund/chessAI/chess/pieces/Tile.class
+com/arvidhammarlund/chessAI/chess/pieces/Direction.class

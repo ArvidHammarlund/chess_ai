@@ -11,16 +11,16 @@ class Rock implements iPiece {
     Direction.DOWN,
     Direction.LEFT,
     Direction.RIGHT
-  }
+  };
   private static final CommonValidator validator = new CommonValidator();
-  private static final TileIterator iterator = new SequentialInterator(
-    Rock.validator, Rock.DIRECTIONS;
+  private static final SequentialIterator iterator = new SequentialIterator(
+    Rock.validator, Rock.DIRECTIONS
   );
 
   // --- Methods ---
 
   @Override
-  List<Tile> availableMoves(
+  public List<Tile> getAvailableMoves(
       Tile t,
       Piece[][] friends,
       Piece[][] foes,

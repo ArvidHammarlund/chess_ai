@@ -1,26 +1,28 @@
-package com.arvidhammarlund.chessAI.chess;
+package com.arvidhammarlund.chessAI.chess.pieces;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 
 class SequentialIterator {
  
   // --- Attriubtes ---
 
-  private final direction[] directions;
-  private final MoveValidator validator;
+  private final List<Direction> directions;
+  private final CommonValidator validator;
 
   // --- Constructor ---
  
-  DirectionalIterator(
-      MoveValidator validator, 
-      Directions[] directions) {
-    this.directions = directions.copy();
+  SequentialIterator(
+      CommonValidator validator, 
+      Direction[] directions) {
+    this.directions = new ArrayList<Direction>(Arrays.asList(directions));
     this.validator = validator;
   }
 
   // --- Methods ---
 
-  @Override
   List<Tile> availableMoves(
       Tile t,
       Piece[][] friends,
@@ -28,8 +30,9 @@ class SequentialIterator {
       boolean isWhite) {
     List<Tile> res = new ArrayList<>();
     for (int i=1; !directions.isEmpty(); i++) {
-      for (Iterator iter=directions.iterator(); iter.hasNext();) {
-        Tile result = result(t, iter.next(), i, isWhite);
+      for (Iterator<Direction> iter=directions.iterator(); iter.hasNext();) {
+        Direction direction = iter.next();
+        Tile result = result(t, direction, i, isWhite);
         if (isValidMove(result, friends, foes, isWhite)) {
           res.add(result);
           continue;
@@ -40,27 +43,27 @@ class SequentialIterator {
         directions.remove(direction);
       }
     } 
-    return res
+    return res;
   }
 
   // --- Helpers ---
   
   private Tile result(
-    Tile state, Direction action, int times, boolean isWhite
+    Tile t, Direction direction, int times, boolean isWhite
   ) {
     int x = t.getX() + times * direction.getDx(isWhite); 
     int y = t.getY() + times * direction.getDy(isWhite);
     return new Tile(x,y);
   } 
 
-  private isValidMove(
+  private boolean isValidMove(
     Tile t, Piece[][] friends, Piece[][] foes, boolean isWhite
   ) {
-    return validator.validateMove(result, friends, foes, isWhite);
+    return validator.isValidMove(t, friends);
   }
 
-  private isValidAttack(Tile result, Piece[][] foes) {
-    return validator.validateAttack(result, foes);
+  private boolean isValidAttack(Tile result, Piece[][] foes) {
+    return validator.isValidAttack(result, foes);
   }
 
 }

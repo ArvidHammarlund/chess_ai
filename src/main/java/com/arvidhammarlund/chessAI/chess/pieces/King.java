@@ -1,35 +1,25 @@
 package com.arvidhammarlund.chessAI.chess.pieces;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 class King implements iPiece {
  
   // --- Attributes ---
 
-  private static final Direction[] DIRECTIONS = {
-    Direction.UP, 
-    Direction.DOWN,
-    Direction.LEFT,
-    Direction.RIGHT,
-    Direction.DIAGONAL_UP_LEFT, 
-    Direction.DIAGONAL_UP_RIGHT,
-    Direction.DIAGONAL_DOWN_LEFT,
-    Direction.DIAGONAL_DOWN_RIGHT
-  }
   private static final CommonValidator validator = new CommonValidator();
-    King.validator, King.DIRECTIONS;
-  );
 
   // --- Methods ---
 
   @Override
-  List<Tile> availableMoves(
+  public List<Tile> getAvailableMoves(
       Tile t,
       Piece[][] friends,
       Piece[][] foes,
       boolean isWhite) {
-    List<Tile> res = new getNeighbours(t, friends);
-    for (Iterator iter = res.iterator(); iter.hasNext();) {
+    List<Tile> res = getNeighbours(t, friends);
+    for (Iterator<Tile> iter = res.iterator(); iter.hasNext();) {
       Tile neighbour = iter.next();
       if (isKingNeighbour(neighbour, foes, friends)) res.remove(neighbour);
     } 
@@ -43,23 +33,22 @@ class King implements iPiece {
     for (int x = t.getX()-1; x < t.getX()+2; x++) {
       for (int y = t.getY()-1; y < t.getY()+2; y++) {
         if (x==y) continue;
-        if (!validator.isValidMove(t,friends));
+        if (!validator.isValidMove(t,friends)) continue;
         res.add(new Tile(x,y));
-        }
       }
     }
     return res;
   }
 
-  private List<Tile> isKingNeighbour(
+  private boolean isKingNeighbour(
       Tile t,
       Piece[][] foes,
       Piece[][] friends) {
     boolean res = false;
     for (Tile neighbour : getNeighbours(t, friends)) {
-      if (foes[neighbour.getX(), neighbour.getY()] == Piece.KING) {
+      if (foes[neighbour.getX()][neighbour.getY()] == Piece.KING) {
         res = true;
-        continue;
+        break;
       } 
     }
     return res;

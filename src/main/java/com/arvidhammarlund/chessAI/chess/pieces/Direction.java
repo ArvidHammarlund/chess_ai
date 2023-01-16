@@ -1,6 +1,6 @@
-package com.arvidhammarlund.chessAI.chess;
+package com.arvidhammarlund.chessAI.chess.pieces;
 
-enum Move {
+enum Direction {
 
   // --- Constants ---
 
@@ -15,8 +15,8 @@ enum Move {
   
   // --- Attributes ---
 
-  private final dx;
-  private final dy;
+  private final int dx;
+  private final int dy;
 
   // --- Constructors ---
 
@@ -29,6 +29,14 @@ enum Move {
 
   Tile result(Tile t) {
     return new Tile(t).translate(dx,dy);
+  }
+
+  int getDx(boolean isWhite) {
+    return (isWhite) ? -1*dx : dx;
+  }
+
+  int getDy(boolean isWhite) {
+    return (isWhite) ? -1*dy : dy;
   }
 
 }

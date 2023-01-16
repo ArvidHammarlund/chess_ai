@@ -11,16 +11,16 @@ class Bishop implements iPiece {
     Direction.DIAGONAL_UP_RIGHT,
     Direction.DIAGONAL_DOWN_LEFT,
     Direction.DIAGONAL_DOWN_RIGHT
-  }
+  };
   private static final CommonValidator validator = new CommonValidator();
-  private static final TileIterator iterator = new SequentialInterator(
-    Bishop.validator, bishop.DIRECTIONS;
+  private static final SequentialIterator iterator = new SequentialIterator(
+    Bishop.validator, Bishop.DIRECTIONS
   );
 
   // --- Methods ---
 
   @Override
-  static List<Tile> availableMoves(
+  public List<Tile> getAvailableMoves(
       Tile t,
       Piece[][] friends,
       Piece[][] foes,
